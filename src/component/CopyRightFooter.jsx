@@ -8,7 +8,7 @@ const footerVariants = {
 const CopyRightFooter = () => {
   return (
     <motion.footer
-      className="relative py-4 bg-gray-800 backdrop-blur-lg text-gray-300 font-mono text-xs md:text-sm border-t border-gray-700"
+      className="py-4 bg-gray-800 backdrop-blur-lg text-gray-300 font-mono text-xs md:text-sm border-t border-gray-700"
       initial="hidden"
       whileInView="visible"
       variants={footerVariants}
