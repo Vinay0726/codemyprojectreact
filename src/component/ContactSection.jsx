@@ -17,10 +17,7 @@ const variants = {
     transition: { duration: 0.5, staggerChildren: 0.1 },
   },
 };
-const footerVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-};
+
 const ContactSection = () => {
   const ref = useRef();
   const formRef = useRef();
@@ -53,54 +50,53 @@ const ContactSection = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      ref={ref}
+      className="h-screen max-w-[1366px] mx-auto pb-2 flex items-center gap-12 flex-col md:flex-row"
+      variants={variants}
+      initial="initial"
+      whileInView="animate"
+    >
       <motion.div
-        ref={ref}
-        className="h-screen max-w-[1366px] mx-auto pb-2 flex items-center gap-12 flex-col md:flex-row"
+        className="flex-1 flex flex-col gap-6 text-center md:text-left"
         variants={variants}
-        initial="initial"
-        whileInView="animate"
       >
-        <motion.div
-          className="flex-1 flex flex-col gap-6 text-center md:text-left"
-          variants={variants}
+        <motion.h1
+          className="text-5xl mt-20 md:mt-0 p-2 md:text-[100px] leading-tight"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 1 }}
         >
-          <motion.h1
-            className="text-5xl mt-20 md:mt-0 p-2 md:text-[100px] leading-tight"
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 1 }}
-          >
-            Let’s Connect
-            <span className="block p-2 text-2xl md:text-2xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-600 mt-3 tracking-wide">
-              Code the Future Together
-            </span>
-          </motion.h1>
-          <motion.div className="flex flex-col gap-4 p-4" variants={variants}>
-            <div className="text-lg">
-              <strong>Address:</strong> Nagpur, Maharashtra
-            </div>
-            <div className="text-lg">
-              <strong>Phone:</strong> +91 7249729185
-            </div>
-          </motion.div>
+          Let’s Connect
+          <span className="block p-2 text-2xl md:text-2xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-600 mt-3 tracking-wide">
+            Code the Future Together
+          </span>
+        </motion.h1>
+        <motion.div className="flex flex-col gap-4 p-4" variants={variants}>
+          <div className="text-lg">
+            <strong>Address:</strong> Nagpur, Maharashtra
+          </div>
+          <div className="text-lg">
+            <strong>Phone:</strong> +91 7249729185
+          </div>
         </motion.div>
+      </motion.div>
 
-        <div className="flex-1 relative px-4">
-          <motion.div
-            className="absolute w-[320px] h-[320px] right-0 md:w-[450px] md:h-[450px] stroke-blue-400 z-[-1] p-4"
-            initial={{ opacity: 1 }}
-            whileInView={{ opacity: 0 }}
-            transition={{ delay: 3, duration: 1 }}
-          >
-            <svg viewBox="0 0 32.666 32.666">
-              <motion.path
-                strokeWidth={0.2}
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={isInView && { pathLength: 1 }}
-                transition={{ duration: 3 }}
-                d="M28.189,16.504h-1.666c0-5.437-4.422-9.858-9.856-9.858l-0.001-1.664C23.021,4.979,28.189,10.149,28.189,16.504z
+      <div className="flex-1 relative px-4">
+        <motion.div
+          className="absolute w-[320px] h-[320px] right-0 md:w-[450px] md:h-[450px] stroke-blue-400 z-[-1] p-4"
+          initial={{ opacity: 1 }}
+          whileInView={{ opacity: 0 }}
+          transition={{ delay: 3, duration: 1 }}
+        >
+          <svg viewBox="0 0 32.666 32.666">
+            <motion.path
+              strokeWidth={0.2}
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={isInView && { pathLength: 1 }}
+              transition={{ duration: 3 }}
+              d="M28.189,16.504h-1.666c0-5.437-4.422-9.858-9.856-9.858l-0.001-1.664C23.021,4.979,28.189,10.149,28.189,16.504z
                 M16.666,7.856L16.665,9.52c3.853,0,6.983,3.133,6.981,6.983l1.666-0.001C25.312,11.735,21.436,7.856,16.666,7.856z 
                 M16.333,0C7.326,0,0,7.326,0,16.334c0,9.006,7.326,16.332,16.333,16.332c0.557,0,1.007-0.45,1.007-1.006
                 c0-0.559-0.45-1.01-1.007-1.01c-7.896,0-14.318-6.424-14.318-14.316c0-7.896,6.422-14.319,14.318-14.319
@@ -113,123 +109,97 @@ const ContactSection = () => {
                 c-2.799,1.774-3.16,6.082-0.428,9.292c1.041,1.228,2.127,2.416,3.245,3.576l-0.006,0.004c0.031,0.031,0.063,0.06,0.095,0.09
                 c0.03,0.031,0.059,0.062,0.088,0.095l0.006-0.006c1.16,1.118,2.535,2.765,4.769,4.255c4.703,3.141,8.312,2.264,10.438,1.098
                 c3.67-2.021,5.312-6.338,5.312-9.719C32.666,7.326,25.339,0,16.333,0z"
-              />
-            </svg>
-          </motion.div>
-
-          <motion.form
-            ref={formRef}
-            onSubmit={sendEmail} // Add the onSubmit handler
-            className="flex flex-col gap-5 w-[80vw] md:w-full "
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 4, duration: 1 }}
-          >
-            <input
-              type="text"
-              required
-              placeholder="Name"
-              name="name"
-              className="p-5 bg-transparent border  rounded-md"
             />
-            <input
-              type="email"
-              required
-              placeholder="Email"
-              name="email"
-              className="p-5 bg-transparent border rounded-md"
-            />
-            <textarea
-              rows={8}
-              placeholder="Message"
-              name="message"
-              className="p-5 bg-transparent border text-gray- rounded-md"
-            />
-            <button className="p-5 bg-blue-400 text-white font-semibold rounded-md hover:bg-blue-500">
-              Submit
-            </button>
-            {error && <p className="text-red-500">Error sending message</p>}
-            {success && (
-              <p className="text-green-500">Message sent successfully!</p>
-            )}
-          </motion.form>
+          </svg>
+        </motion.div>
 
-          {/* Footer Section */}
-          <motion.div
-            className="mt-6 flex justify-center gap-6 text-3xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 1 }}
-          >
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-orange-500 transition-colors"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-500 transition-colors"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-sky-400 transition-colors"
-            >
-              <FaWhatsapp />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-500 transition-colors"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="https://gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-500 transition-colors"
-            >
-              <SiGmail />
-            </a>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="relative bottom-0 py-4 mt-6 bg-gray-800 backdrop-blur-lg text-gray-300 font-mono text-xs md:text-sm border-t border-gray-700"
-        initial="hidden"
-        whileInView="visible"
-        variants={footerVariants}
-        viewport={{ once: true }}
-      >
-        <div className="max-w-[1400px] mx-auto flex flex-col items-center gap-3">
-          <p className="text-center tracking-wide">
-            © {new Date().getFullYear()}{" "}
-            <span className="font-semibold text-white">CodeMyProject</span>
-            <span className="text-neon-blue mx-2">/</span>
-            <span className="text-neon-blue hover:text-cyan-400 transition-all duration-300">
-              Crafted in the Future
-            </span>
-          </p>
-          <motion.div
-            className="h-[2px] w-24 bg-gradient-to-r from-transparent via-neon-blue to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ delay: 0.3, duration: 1 }}
+        <motion.form
+          ref={formRef}
+          onSubmit={sendEmail} // Add the onSubmit handler
+          className="flex flex-col gap-5 w-[80vw] md:w-full "
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 4, duration: 1 }}
+        >
+          <input
+            type="text"
+            required
+            placeholder="Name"
+            name="name"
+            className="p-5 bg-transparent border  rounded-md"
           />
-        </div>
-      </motion.div>
-    </div>
+          <input
+            type="email"
+            required
+            placeholder="Email"
+            name="email"
+            className="p-5 bg-transparent border rounded-md"
+          />
+          <textarea
+            rows={8}
+            placeholder="Message"
+            name="message"
+            className="p-5 bg-transparent border text-gray- rounded-md"
+          />
+          <button className="p-5 bg-blue-400 text-white font-semibold rounded-md hover:bg-blue-500">
+            Submit
+          </button>
+          {error && <p className="text-red-500">Error sending message</p>}
+          {success && (
+            <p className="text-green-500">Message sent successfully!</p>
+          )}
+        </motion.form>
+
+        {/* Footer Section */}
+        <motion.div
+          className="mt-6 flex justify-center gap-6 text-3xl"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+        >
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-orange-500 transition-colors"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-500 transition-colors"
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-sky-400 transition-colors"
+          >
+            <FaWhatsapp />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-500 transition-colors"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-500 transition-colors"
+          >
+            <SiGmail />
+          </a>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 
