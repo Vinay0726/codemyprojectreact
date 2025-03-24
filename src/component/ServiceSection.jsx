@@ -61,7 +61,7 @@ const services = [
 const ServiceCard = ({ title, description, details, icon, gradient }) => {
   return (
     <motion.div
-      className={`h-[220px] w-[260px] relative bg-white/90 backdrop-blur-md shadow-xl rounded-3xl p-8  transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group overflow-hidden flex justify-center items-center`}
+      className={`h-[260px] w-[300px] sm:h-[220px] sm:w-[260px] relative bg-white/90 backdrop-blur-md shadow-xl rounded-3xl p-8  transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group overflow-hidden flex justify-center items-center`}
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.03, rotate: 1 }}
@@ -87,10 +87,10 @@ const ServiceCard = ({ title, description, details, icon, gradient }) => {
         >
           {icon}
         </motion.div>
-        <h3 className="text-2xl p-2 font-extrabold mt-4 text-gray-900 text-center group-hover:text-white transition-colors duration-300">
+        <h3 className="text-2xl  font-extrabold mt-4 text-gray-900 text-center group-hover:text-white transition-colors duration-300">
           {title}
         </h3>
-        <p className="text-gray-700 p-2 mt-2 text-center text-balance group-hover:text-white/90 transition-colors duration-300 ">
+        <p className="text-gray-700 mt-2 text-center text-balance group-hover:text-white/90 transition-colors duration-300 ">
           {description}
         </p>
       </div>
