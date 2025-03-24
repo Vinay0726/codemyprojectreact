@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ContactSection from "./component/ContactSection";
-import CopyRightFooter from "./component/CopyRightFooter";
 import Cursor from "./component/Cursor"
 import ExperienceSection from "./component/ExperienceSection";
 import LandingSection from "./component/LandingSection"
@@ -40,7 +39,7 @@ function App() {
       </div>
       <div id="Contact">
         <ContactSection />
-        <CopyRightFooter />
+        
       </div>
 
       {/* Loader overlays the content */}
