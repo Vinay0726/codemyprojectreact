@@ -41,9 +41,9 @@ function App() {
       <div id="Contact">
         <ContactSection />
       </div>
-      <div id="footer">
+      
         <CopyRightFooter />
-      </div>
+     
 
       {/* Loader overlays the content */}
       <AnimatePresence>{loading && <Loader />}</AnimatePresence>
