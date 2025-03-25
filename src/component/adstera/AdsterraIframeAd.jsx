@@ -2,72 +2,82 @@ import React, { useEffect, useRef, useState } from "react";
 
 const AdsterraIframeAd = () => {
   const adRef = useRef(null);
-  const [showAd, setShowAd] = useState(window.innerWidth >= 728);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 728);
 
-  // Handle window resize to toggle ad visibility
+  // Handle window resize to toggle between ad sizes
   useEffect(() => {
     const handleResize = () => {
-      setShowAd(window.innerWidth >= 728);
+      setIsLargeScreen(window.innerWidth >= 728);
     };
 
-    // Add resize event listener
     window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Load the ad script when the component mounts and the ad should be shown
+  // Load the appropriate ad script based on screen size
   useEffect(() => {
-    if (!showAd) return; // Skip if ad shouldn't be shown
+    const adConfig = isLargeScreen
+      ? {
+          key: "5b10493ec213727de074e7df4f1adf94", // 728x90 ad
+          format: "iframe",
+          height: 90,
+          width: 728,
+          params: {},
+          scriptSrc:
+            "//www.highperformanceformat.com/5b10493ec213727de074e7df4f1adf94/invoke.js",
+        }
+      : {
+          key: "f672c1b8de734cbd4fd9de8f9314d224", // 300x250 ad
+          format: "iframe",
+          height: 250,
+          width: 300,
+          params: {},
+          scriptSrc:
+            "//www.highperformanceformat.com/f672c1b8de734cbd4fd9de8f9314d224/invoke.js",
+        };
 
-    // Set up atOptions globally (required by Adsterra)
+    // Set up atOptions globally
     window.atOptions = {
-      key: "5b10493ec213727de074e7df4f1adf94",
-      format: "iframe",
-      height: 90,
-      width: 728,
-      params: {},
+      key: adConfig.key,
+      format: adConfig.format,
+      height: adConfig.height,
+      width: adConfig.width,
+      params: adConfig.params,
     };
 
-    // Check if the script is already loaded to avoid duplicates
-    if (
-      !document.querySelector(
-        `script[src="//www.highperformanceformat.com/5b10493ec213727de074e7df4f1adf94/invoke.js"]`
-      )
-    ) {
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src =
-        "//www.highperformanceformat.com/5b10493ec213727de074e7df4f1adf94/invoke.js";
-      script.async = true;
-
-      // Append the script to the ad container
-      if (adRef.current) {
-        adRef.current.appendChild(script);
-      }
-
-      // Cleanup: Remove script when component unmounts or ad is hidden
-      return () => {
-        if (adRef.current && script.parentNode === adRef.current) {
-          adRef.current.removeChild(script);
-        }
-      };
+    // Remove any existing script to avoid conflicts
+    const existingScript = document.querySelector(
+      `script[src="${adConfig.scriptSrc}"]`
+    );
+    if (existingScript && existingScript.parentNode) {
+      existingScript.parentNode.removeChild(existingScript);
     }
-  }, [showAd]); // Re-run when showAd changes
 
-  // Return null if the screen is too small, otherwise render the ad container
-  if (!showAd) return null;
+    // Create and append new script
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = adConfig.scriptSrc;
+    script.async = true;
+
+    if (adRef.current) {
+      adRef.current.appendChild(script);
+    }
+
+    // Cleanup
+    return () => {
+      if (adRef.current && script.parentNode === adRef.current) {
+        adRef.current.removeChild(script);
+      }
+    };
+  }, [isLargeScreen]); // Re-run when screen size toggle changes
 
   return (
     <div
       ref={adRef}
       style={{
-        width: "728px",
-        height: "90px",
-        maxWidth: "100%", // Prevent overflow on slightly smaller screens
+        width: isLargeScreen ? "728px" : "300px",
+        height: isLargeScreen ? "90px" : "250px",
+        maxWidth: "100%", // Prevent overflow
         margin: "0 auto", // Center the ad
       }}
     />
