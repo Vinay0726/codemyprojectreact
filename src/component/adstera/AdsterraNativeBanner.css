@@ -1,0 +1,18 @@
+.native-banner {
+  max-width: 100%; /* Ensure it fits the viewport */
+  margin: 0 auto; /* Center horizontally */
+  overflow: hidden; /* Prevent content from spilling out */
+}
+
+/* Optional: Set a default size if Adsterra doesn’t specify one */
+.native-banner {
+  width: 300px; /* Default width, adjust if needed */
+  height: auto; /* Let height adjust dynamically */
+}
+
+/* Scale down proportionally on smaller screens */
+@media (max-width: 300px) {
+  .native-banner {
+    width: 100%; /* Take full width on small screens */
+  }
+}
