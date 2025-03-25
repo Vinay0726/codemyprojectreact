@@ -11,6 +11,7 @@ import ServiceSection from "./component/ServiceSection";
 
 import TopNav from "./component/TopNav"
 import { AnimatePresence } from "framer-motion";
+import AdsterraIframeAd from "./component/adstera/AdsterraIframeAd";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <div id="Projects">
         <ProjectSection />
       </div>
+      <AdsterraIframeAd />
       <div id="Contact">
         <ContactSection />
       </div>
