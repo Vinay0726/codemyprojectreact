@@ -79,21 +79,23 @@ const ServiceCard = ({ title, description, details, icon, gradient }) => {
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ repeat: Infinity, duration: 2 }}
       />
-      <div className="relative z-10">
-        <motion.div
-          className="flex justify-center p-2"
-          whileHover={{ rotate: 360 }}
-          transition={{ duration: 0.8 }}
-        >
-          {icon}
-        </motion.div>
-        <h3 className="text-2xl  font-extrabold mt-4 text-gray-900 text-center group-hover:text-white transition-colors duration-300">
-          {title}
-        </h3>
-        <p className="text-gray-700 mt-2 text-center text-balance group-hover:text-white/90 transition-colors duration-300 ">
-          {description}
-        </p>
-      </div>
+      <a href="https://www.effectiveratecpm.com/jt47uisms?key=cb20bb4266a240fb6065282b95bf61d7">
+        <div className="relative z-10">
+          <motion.div
+            className="flex justify-center p-2"
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.8 }}
+          >
+            {icon}
+          </motion.div>
+          <h3 className="text-2xl  font-extrabold mt-4 text-gray-900 text-center group-hover:text-white transition-colors duration-300">
+            {title}
+          </h3>
+          <p className="text-gray-700 mt-2 text-center text-balance group-hover:text-white/90 transition-colors duration-300 ">
+            {description}
+          </p>
+        </div>
+      </a>
     </motion.div>
   );
 };

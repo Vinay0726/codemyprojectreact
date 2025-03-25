@@ -248,15 +248,17 @@ const ProjectSection = () => {
                 className="bg-gray-800/50 backdrop-blur-md border border-cyan-500/20 rounded-xl p-5 sm:p-6 hover:border-cyan-500/50 transition-all duration-300 flex flex-col"
               >
                 <motion.div className="overflow-hidden rounded-lg mb-4">
-                  <motion.img
-                    src={projectImages[selectedTech][index]}
-                    alt={project.title}
-                    className="w-full h-60 sm:h-60 object-fill"
-                    variants={imageVariants}
-                    initial="initial"
-                    whileHover="hover"
-                    transition={{ duration: 0.3 }}
-                  />
+                  <a href="https://www.effectiveratecpm.com/jt47uisms?key=cb20bb4266a240fb6065282b95bf61d7">
+                    <motion.img
+                      src={projectImages[selectedTech][index]}
+                      alt={project.title}
+                      className="w-full h-60 sm:h-60 object-fill"
+                      variants={imageVariants}
+                      initial="initial"
+                      whileHover="hover"
+                      transition={{ duration: 0.3 }}
+                    />
+                  </a>
                 </motion.div>
                 <h3 className="text-xl sm:text-2xl font-semibold text-cyan-300 mb-2 sm:mb-3">
                   {project.title}
